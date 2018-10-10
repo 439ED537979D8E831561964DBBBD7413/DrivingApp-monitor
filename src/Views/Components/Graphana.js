@@ -41,7 +41,7 @@ export default class Graph extends React.Component {
                     </div>
                     <div className="card-body ">
                         <iframe 
-                            src={`${this.props.url}${this.state.minusThirty}&to=${this.state.now}`} 
+                            src={`${this.props.url}${this.state.minusThirty}&to=${this.state.now}&theme=light`} 
                             width="100%" 
                             height="300"
                             frameBorder="0"

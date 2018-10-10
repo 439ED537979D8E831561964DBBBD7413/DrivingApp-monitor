@@ -21,7 +21,7 @@ export default class Alerts extends React.Component {
 
     getAlertsCategory () {
 
-        fetch("http://192.168.191.134:8000/alerts/count/category")
+        fetch("https://smartsecurity-notifications.herokuapp.com/alerts/count/category")
         .then((result) => {
             return result.json()
         })
@@ -32,7 +32,7 @@ export default class Alerts extends React.Component {
     }
 
     getAlertsSeverity () {
-        fetch("http://192.168.191.134:8000/alerts/count/severity")
+        fetch("https://smartsecurity-notifications.herokuapp.com/alerts/count/severity")
         .then((result) => {
             return result.json()
         })
@@ -44,7 +44,7 @@ export default class Alerts extends React.Component {
 
     getAlertsZone () {
 
-        fetch("http://192.168.191.134:8000/alerts/count/context/zone")
+        fetch("https://smartsecurity-notifications.herokuapp.com/alerts/count/context/zone")
         .then((result) => {
             return result.json();
         })

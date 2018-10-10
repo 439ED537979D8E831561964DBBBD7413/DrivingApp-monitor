@@ -11,7 +11,7 @@ export default class SubcategoryAlerts extends React.Component {
                 <Graph
                     title = "Alerts by Subcategory"
                     subtitle = "Last hour performance"
-                    url = "http://35.196.174.137:3000/d-solo/7wK4ckAik/alerts?orgId=1&panelId=4&from="
+                    url = "http://35.196.174.137:3000/d-solo/vlpsRxJik/alerts?panelId=4&orgId=1&tab=metrics&from="
                 />
             </div>
         )
