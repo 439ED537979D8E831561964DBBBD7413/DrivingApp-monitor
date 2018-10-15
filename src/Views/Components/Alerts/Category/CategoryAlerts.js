@@ -10,7 +10,7 @@ export default class CategoryAlerts extends React.Component {
                 <Graph
                     title = "Alerts by Category"
                     subtitle = "Last hour performance"
-                    url = "http://35.196.174.137:3000/d-solo/vlpsRxJik/alerts?panelId=2&orgId=1&tab=metrics&from="
+                    url = "http://35.185.120.11:3000/d-solo/740rn61mk/alerts?panelId=2&orgId=1&from="
                 />
             </div>
         )

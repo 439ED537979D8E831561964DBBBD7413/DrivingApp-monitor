@@ -2,9 +2,9 @@ import { createStore} from 'redux';
 
 var initialState = {
     
-    categoryAlerts : [],
-    severityAlerts : [],
-    zoneAlerts : []
+    categoryAlerts : {},
+    severityAlerts : {},
+    zoneAlerts : {}
 
   
 }

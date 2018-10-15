@@ -24,7 +24,6 @@ export default class SeverityCards extends React.Component {
     getSeverityAlerts() {
         try {
             let severityAlerts = store.getState().severityAlerts;
-            
             this.setState(severityAlerts);
         }catch(err){
             console.log(err)

@@ -20,7 +20,18 @@ export default class ZoneAlerts extends React.Component {
     }
 
     getZoneAlerts(){
-        this.setState({data : store.getState().zoneAlerts});
+        
+        let data = store.getState().zoneAlerts;
+        console.log(data)
+        if (!(Object.keys(data).length === 0 && data.constructor === Object)){
+            var dataTemp  = [["Zone", "Alerts"]];
+            for (let zone in data){
+                dataTemp.push([data[zone]["name"], parseInt(data[zone]["count"], 10)])
+            } 
+            console.log(dataTemp)
+            this.setState({data : dataTemp });
+        }
+        
     }
 
     componentWillMount () {
@@ -33,7 +44,7 @@ export default class ZoneAlerts extends React.Component {
 
     haveZoneAlerts(){
 
-        if(this.state.data.length > 0){
+        if(this.state.data.length >= 1){
             return(
                 <GoogleChart
                     title="Zone Alerts" 

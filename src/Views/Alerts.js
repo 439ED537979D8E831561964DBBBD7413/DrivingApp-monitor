@@ -10,6 +10,9 @@ import ZoneAlerts from './Components/Alerts/Zones/ZoneAlerts';
 import { loadCategoryAlerts , loadSeverityAlerts, loadZoneAlerts} from '../Redux/Actions/index';
 import store from '../Redux/Reducers/index'
 
+import io from 'socket.io-client';
+
+
 export default class Alerts extends React.Component {
 
     constructor (props){
@@ -17,11 +20,16 @@ export default class Alerts extends React.Component {
         this.getAlertsCategory = this.getAlertsCategory.bind(this);
         this.getAlertsSeverity = this.getAlertsSeverity.bind(this);
         this.getAlertsZone = this.getAlertsZone.bind(this);
+        this.socket = io.connect(`http://localhost:3002`)//, { transports: ['websocket'] });
+        this.state = {
+            chanel : "",
+            interval : null
+        }
+        
     }
 
     getAlertsCategory () {
-
-        fetch("https://smartsecurity-notifications.herokuapp.com/alerts/count/category")
+        fetch("http://localhost:3002/alerts/count/category")
         .then((result) => {
             return result.json()
         })
@@ -32,7 +40,7 @@ export default class Alerts extends React.Component {
     }
 
     getAlertsSeverity () {
-        fetch("https://smartsecurity-notifications.herokuapp.com/alerts/count/severity")
+        fetch("http://localhost:3002/alerts/count/severity")
         .then((result) => {
             return result.json()
         })
@@ -43,26 +51,42 @@ export default class Alerts extends React.Component {
     }
 
     getAlertsZone () {
-
-        fetch("https://smartsecurity-notifications.herokuapp.com/alerts/count/context/zone")
+        fetch("http://localhost:3002/alerts/count/zone")
         .then((result) => {
             return result.json();
         })
         .then(data =>{
-            var dataTemp  = [["Task", "Hours per Day"]];
-            data.map(item => {
-                dataTemp.push([item[1], item[2]])
-                return true;
-            });
-            store.dispatch(loadZoneAlerts(dataTemp))      
+            store.dispatch(loadZoneAlerts(data))      
         })
         .catch(console.log)
+        var interval = setInterval(() => {
+            fetch("http://localhost:3002/alerts/count/zone")
+            .then((result) => {
+                return result.json();
+            })
+            .then(data =>{
+                store.dispatch(loadZoneAlerts(data))      
+            })
+            .catch(console.log)
+        }, 60000)
+
+        this.setState({
+            interval
+        })
+        
     }
 
     componentDidMount(){
+        this.socket.on('severityalerts', (data) =>store.dispatch(loadSeverityAlerts(data)));
+        this.socket.on('categoryalerts', (data) =>store.dispatch(loadCategoryAlerts(data)));
+        this.socket.on('zonealerts' , (data) =>store.dispatch(loadZoneAlerts(data)));
         this.getAlertsCategory();
         this.getAlertsSeverity();
         this.getAlertsZone();
+    }
+
+    componentWillUnmount () {
+        clearInterval(this.state.interval);
     }
 
     render() {

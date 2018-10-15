@@ -8,9 +8,9 @@ export default class CategoryCards extends React.Component {
         super(props);
         this.getCategoryAlerts =  this.getCategoryAlerts.bind(this);
         this.state = {
-            trafficCount : 0,
-            securityCount : 0,
-            unknownCount : 0
+            traffic : 0,
+            security : 0,
+            unknownAlert : 0
         }
         
         let t = this;
@@ -24,18 +24,10 @@ export default class CategoryCards extends React.Component {
     }
 
     getCategoryAlerts(){
-        
         try {
             let categoryAlerts = store.getState().categoryAlerts;
-            let tempState = {
-                trafficCount : categoryAlerts[0][0],
-                securityCount : categoryAlerts[1][0],
-                unknownCount : categoryAlerts[2][0]
-            }
-            this.setState(tempState);
-        }catch(err){
-            //console.error(err)
-        }
+            this.setState(categoryAlerts);
+        }catch(err){console.log(err)}
     }
 
     componentWillUnmount(){
@@ -50,7 +42,7 @@ export default class CategoryCards extends React.Component {
                         iconColor="warning" 
                         icon="traffic" 
                         title="Traffic Alerts" 
-                        count={this.state.trafficCount} 
+                        count={this.state.traffic} 
                         time="Few minutes ago"
                     />
                 </div>
@@ -59,7 +51,7 @@ export default class CategoryCards extends React.Component {
                         iconColor="success" 
                         icon="verified_user" 
                         title="Security Alerts" 
-                        count={this.state.securityCount} 
+                        count={this.state.security} 
                         time="Few minutes ago"
                     />
                 </div>
@@ -68,7 +60,7 @@ export default class CategoryCards extends React.Component {
                         iconColor="danger" 
                         icon="warning" 
                         title="Unknown Alerts" 
-                        count={this.state.unknownCount} 
+                        count={this.state.unknownAlert} 
                         time="Few minutes ago"
                     />
                 </div>
