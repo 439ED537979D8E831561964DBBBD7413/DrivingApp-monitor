@@ -20,7 +20,7 @@ export default class Alerts extends React.Component {
         this.getAlertsCategory = this.getAlertsCategory.bind(this);
         this.getAlertsSeverity = this.getAlertsSeverity.bind(this);
         this.getAlertsZone = this.getAlertsZone.bind(this);
-        this.socket = io.connect(`http://localhost:3002`)//, { transports: ['websocket'] });
+        this.socket = io.connect(`https://drivingapp-monitor.herokuapp.com`)//, { transports: ['websocket'] });
         this.state = {
             chanel : "",
             interval : null
@@ -29,7 +29,7 @@ export default class Alerts extends React.Component {
     }
 
     getAlertsCategory () {
-        fetch("http://localhost:3002/alerts/count/category")
+        fetch("https://drivingapp-monitor.herokuapp.com/alerts/count/category")
         .then((result) => {
             return result.json()
         })
@@ -40,7 +40,7 @@ export default class Alerts extends React.Component {
     }
 
     getAlertsSeverity () {
-        fetch("http://localhost:3002/alerts/count/severity")
+        fetch("https://drivingapp-monitor.herokuapp.com/alerts/count/severity")
         .then((result) => {
             return result.json()
         })
@@ -51,7 +51,7 @@ export default class Alerts extends React.Component {
     }
 
     getAlertsZone () {
-        fetch("http://localhost:3002/alerts/count/zone")
+        fetch("https://drivingapp-monitor.herokuapp.com/alerts/count/zone")
         .then((result) => {
             return result.json();
         })
@@ -60,7 +60,7 @@ export default class Alerts extends React.Component {
         })
         .catch(console.log)
         var interval = setInterval(() => {
-            fetch("http://localhost:3002/alerts/count/zone")
+            fetch("https://drivingapp-monitor.herokuapp.com/alerts/count/zone")
             .then((result) => {
                 return result.json();
             })
