@@ -56,10 +56,13 @@ class SideBar extends React.Component {
                 className="nav-item nav-link" 
                 activeClassName='active'  
                 to="/"
-                > <i className="nc-icon nc-alert-circle-i"></i> Alerts Monitor</NavLink>
+                > 
+                  <i className="nc-icon nc-alert-circle-i"></i> 
+                  Alerts Monitor
+                </NavLink>
             </li>
             <li className={this.state["choices"]}>
-              <NavLink exact className="nav-item nav-link" activeClassName='active'  to="/choices"> <i className="nc-icon nc-circle-10"></i>Users Monitor</NavLink>
+              <NavLink exact className="nav-item nav-link" activeClassName='active'  to="/choices"> <i className="nc-icon nc-circle-10"></i>User Choices </NavLink>
             </li>
             <li>
               <a href="./map.html">
