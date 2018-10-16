@@ -13,5 +13,5 @@ app.use('/', express.static(__dirname + '/build'));
 
 const port = process.env.PORT || 3002;
 app.listen(port, function(){
-	console.log(" Servidor del api rest escuchando en http://localhost:" + port);
+	console.log("Running in http://localhost:" + port);
 });
