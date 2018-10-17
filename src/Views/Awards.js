@@ -11,7 +11,7 @@ export default class Awards extends React.Component {
     }
 
     componentDidMount () {
-        fetch ("http://10.1.66.10:3500/awards/best")
+        fetch ("https://drivingapp-monitor-back.herokuapp.com/awards/best")
         .then ( (alertsCount) =>{
             return alertsCount.json();
         }).then(( async json => {
