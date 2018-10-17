@@ -7,7 +7,7 @@ class SideBar extends React.Component {
         //this.changePath = this.changePath.bind(this);
         this.state = {
             alerts : "",
-            choices : ""
+            awards : ""
         };
     }
 
@@ -15,18 +15,16 @@ class SideBar extends React.Component {
         this.changePath(this.props.location.pathname)
     }
 
-    
-
     changePath(pathname) {
         if (pathname === "/"){
             this.setState({
                 alerts : "active",
-                 choices : ""
+                 awards : ""
             })
-        }else if (pathname === "/choices") {
+        }else if (pathname === "/awards") {
             this.setState({
                 alerts : "",
-                 choices : "active"
+                 awards : "active"
             })
         }
     }
@@ -61,8 +59,8 @@ class SideBar extends React.Component {
                   Alerts Monitor
                 </NavLink>
             </li>
-            <li className={this.state["choices"]}>
-              <NavLink exact className="nav-item nav-link" activeClassName='active'  to="/choices"> <i className="nc-icon nc-circle-10"></i>User Choices </NavLink>
+            <li className={this.state["awards"]}>
+              <NavLink exact className="nav-item nav-link" activeClassName='active'  to="/awards"> <i className="nc-icon nc-circle-10"></i>User awards </NavLink>
             </li>
             <li>
               <a href="./map.html">

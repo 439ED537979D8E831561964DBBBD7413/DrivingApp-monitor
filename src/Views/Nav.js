@@ -22,9 +22,9 @@ export default class Nav extends React.Component {
                 title : "Alerts Monitor"
 
             })
-        }else if (pathname === "/choices") {
+        }else if (pathname === "/awards") {
             this.setState({
-                title: "User Choices"
+                title: "User awards"
             })
         }
     }
