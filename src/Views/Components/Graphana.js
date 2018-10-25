@@ -7,8 +7,9 @@ export default class Graph extends React.Component {
         var now = DateTime.utc();
         this.state = {
             now : now.ts,
-            minusThirty : now.minus({months : 1}).endOf("minutes").ts,
+            //minusThirty : now.minus({months : 1}).endOf("minutes").ts,
             //minusThirty : now.minus({hours : 1}).endOf("minutes").ts,
+            minusThirty : now.minus({hour : 1}).endOf("minutes").ts,
             timeMessage : "Updated right now",
             interval : null
         };
@@ -20,8 +21,8 @@ export default class Graph extends React.Component {
             var now = DateTime.utc();
             t.setState({
                 now : now.ts,
-                minusThirty : now.minus({months : 1}).endOf("minutes").ts
-                //minusThirty : now.minus({hours : 1}).endOf("minutes").ts
+                //minusThirty : now.minus({months : 1}).endOf("minutes").ts
+                minusThirty : now.minus({hour : 1}).endOf("minutes").ts
             });
         }, 60000)
 
