@@ -7,7 +7,8 @@ class SideBar extends React.Component {
         //this.changePath = this.changePath.bind(this);
         this.state = {
             alerts : "",
-            awards : ""
+            awards : "",
+            areas : ""
         };
     }
 
@@ -19,14 +20,22 @@ class SideBar extends React.Component {
         if (pathname === "/"){
             this.setState({
                 alerts : "active",
-                 awards : ""
+                 awards : "",
+                 areas : ""
             })
         }else if (pathname === "/awards") {
             this.setState({
                 alerts : "",
-                 awards : "active"
+                 awards : "active",
+                 areas : ""
             })
-        }
+        }else if (pathname === "/map") {
+          this.setState({
+              alerts : "",
+               awards : "",
+               areas : "active"
+          })
+      }
     }
 
     componentWillReceiveProps (nextProps){
@@ -62,13 +71,17 @@ class SideBar extends React.Component {
             <li className={this.state["awards"]}>
               <NavLink exact className="nav-item nav-link" activeClassName='active'  to="/awards"> <i className="nc-icon nc-circle-10"></i>User awards </NavLink>
             </li>
-            <li>
-              <a href="./map.html">
-                <i className="nc-icon nc-globe"></i>
-                <p>Areas Delimitations</p>
-              </a>
+            <li className={this.state["areas"]}>
+              <NavLink
+                exact
+                className="nav-item nav-link" 
+                activeClassName='active'  
+                to="/map"> 
+                  <i className="nc-icon nc-globe"></i>
+                  Map
+              </NavLink>
             </li>
-            <li>
+            <li >
               <a href="./notifications.html">
                 <i className="nc-icon nc-bell-55"></i>
                 <p>Notifications</p>

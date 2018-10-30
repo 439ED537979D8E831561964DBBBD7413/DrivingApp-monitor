@@ -38,7 +38,6 @@ export default class Awards extends React.Component {
         .then ( (alertsCount) =>{
             return alertsCount.json();
         }).then(( async json => {
-            console.log(json)
             await json.map(async (item) => {
                 await fetch(`http://smartsecurity-webservice.herokuapp.com/api/user/${item.owner}`)
                 .then(user => {return user.json()})

@@ -26,7 +26,11 @@ export default class Nav extends React.Component {
             this.setState({
                 title: "User awards"
             })
-        }
+        }else if (pathname === "/map") {
+          this.setState({
+              title: "Map"
+          })
+      }
     }
 
     componentWillReceiveProps (nextProps){
