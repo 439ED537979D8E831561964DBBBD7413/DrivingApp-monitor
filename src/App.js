@@ -63,6 +63,7 @@ export default class App extends React.Component {
           store.dispatch(loadZoneAlerts(data))      
       })
       .catch(console.log)
+
       var interval = setInterval(() => {
           fetch("https://drivingapp-monitor-back.herokuapp.com/alerts/count/zone")
           .then((result) => {
@@ -77,7 +78,6 @@ export default class App extends React.Component {
       this.setState({
           interval
       })
-      
   }
 
   componentDidMount(){

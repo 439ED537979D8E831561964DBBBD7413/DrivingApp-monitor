@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import store from  '../../Redux/Reducers/index';
-import car from '../Images/accident_critical.png'
 
 import { withGoogleMap, GoogleMap, Marker, Polyline} from 'react-google-maps';
 
@@ -19,63 +18,57 @@ class Map extends Component {
         super(props);
         this.getZoneAlerts = this.getZoneAlerts.bind(this);
         this.state = {
-            zones : [],
-            zonesid: {}
+            zones : []
         }
-        
+        let t = this;
+        this.subs = store.subscribe( async () => {
+            t.getZoneAlerts();
+        })
     }
     componentDidMount (){
         this.getZoneAlerts();
-        this.subs = store.subscribe( async () => {
-            this.getZoneAlerts();
-        })
+        
     }
 
     async getZoneAlerts (){
         try {
             var zones = [];
-            if (this.state.zones.length < 1) {
-                for (let zone in store.getState().zoneAlerts){
-                    var tempZone =  store.getState().zoneAlerts[zone];
-                    await fetch (`https://drivingapp-monitor-back.herokuapp.com/alerts/all/zone/${zone}`)
-                    .then((result) =>{return result.json();})
-                    .then((alerts) =>{
-                        for (let a in alerts){
-                            alerts[a].location = alerts[a].location.split(",");
-                        }
-                        tempZone.alerts = alerts;
-                        zones.push(tempZone)
-                    })
-                }
-                this.setState({
-                    zones , zonesid : store.getState().zoneAlerts
-                })
+            for (let zone in store.getState().zoneAlerts){
+                var tempZone =  store.getState().zoneAlerts[zone];
+                zones.push(tempZone);
             }
+            this.setState({
+                zones
+            })
+            
         }catch(e){
-            console.log(e)
         }
     }
+    
+    convertPolygon (polygon) {
+        let tempLocation = []
+        for (let coords in polygon){
+            let newcoords = {
+                lat : polygon[coords][0],
+                lng : polygon[coords][1]
+            }
+            tempLocation.push(newcoords)
+        }
+        return tempLocation
+    }
+
+    convertCoords (original) {
+        let array = original.split(",");
+        return {
+            lat: Number(array[0]), 
+            lng :Number(array[1])
+        }
+    }
+    
 
    render() {
 
-        var zones = [];
-        if (this.state.zones.length > 0){
-
-            for (let zone in this.state.zones) {
-                var tempZone =  this.state.zones[zone];
-                var tempCoords = [];
-                for (let coords  in tempZone.location) {
-                    tempCoords.push({
-                        lat : tempZone.location[coords][0],
-                        lng: tempZone.location[coords][1]
-                    })
-                }
-                tempZone.location = tempCoords;
-                zones.push(tempZone);
-            }
-
-            
-        }
+        
        
         const GoogleMapExample = withGoogleMap(props => (
         <GoogleMap
@@ -93,25 +86,23 @@ class Map extends Component {
                         key={j}
                     >
                     {
-                
                         zone.alerts.map((alert,i) => (
                             <Marker
                                 key={i}
                                 options={{icon: {url : images.accident, scaledSize: new window.google.maps.Size(60, 62)}}}
-                                position={{lat : Number(alert.location[0]), lng : Number(alert.location[1])}}
+                                position={this.convertCoords(alert.location)}
                             />
-                        ))
-                                
+                        ))   
                     }
                     </MarkerClusterer>
                 ))
             }
 
             {
-                zones.map((zone ,i ) => (
+                this.state.zones.map((zone ,i ) => (
                     <Polyline 
                         key={i}
-                        path={zone.location}
+                        path={this.convertPolygon(zone.location)}
                         options={{strokeColor: '#2980b9'}}
                     ></Polyline>
                 ))
