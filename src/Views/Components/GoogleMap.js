@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import store from  '../../Redux/Reducers/index';
+import car from '../Images/accident_critical.png'
 
 import { withGoogleMap, GoogleMap, Marker, Polyline} from 'react-google-maps';
 
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 const center = {
     lat : 19.432608, lng: -99.133209
+}
+const images = {
+    accident : "https://github.com/cenidetiot/DrivingApp/raw/dev/app/src/main/res/drawable/accident.png",
+    speeding : "https://github.com/cenidetiot/DrivingApp/raw/dev/app/src/main/res/drawable/speed_critical.png",
+    traffic : "https://github.com/cenidetiot/DrivingApp/raw/dev/app/src/main/res/drawable/traffic_low.png",
 }
 
 class Map extends Component {
@@ -31,7 +37,7 @@ class Map extends Component {
             if (this.state.zones.length < 1) {
                 for (let zone in store.getState().zoneAlerts){
                     var tempZone =  store.getState().zoneAlerts[zone];
-                    await fetch (`http://localhost:3500/alerts/all/zone/${zone}`)
+                    await fetch (`https://drivingapp-monitor-back.herokuapp.com/alerts/all/zone/${zone}`)
                     .then((result) =>{return result.json();})
                     .then((alerts) =>{
                         for (let a in alerts){
@@ -91,6 +97,7 @@ class Map extends Component {
                         zone.alerts.map((alert,i) => (
                             <Marker
                                 key={i}
+                                options={{icon: {url : images.accident, scaledSize: new window.google.maps.Size(60, 62)}}}
                                 position={{lat : Number(alert.location[0]), lng : Number(alert.location[1])}}
                             />
                         ))
@@ -119,7 +126,7 @@ class Map extends Component {
       <div>
         <GoogleMapExample
           containerElement={ <div style={{ height: `650px`, width: '100%' }} /> }
-          mapElement={ <div style={{ height: `100%` }} /> }
+          mapElement={ <div style={{ height: `95%` }} /> }
         />
       </div>
    );
