@@ -30,13 +30,13 @@ export default class Alerts extends React.Component {
                 </nav>
 
                 <div style={{marginTop : 10}}>
-
+                    <Route exact path="/" component={CategoryAlerts} />
+                    <Route path="/sub" component={SubcategoryAlerts} />
+                    <Route path="/severity" component={SeverityAlerts} />
+                    <Route path="/zones" component={ZoneAlerts} />
                 </div>
 
-                <Route exact path="/" component={CategoryAlerts} />
-                <Route path="/sub" component={SubcategoryAlerts} />
-                <Route path="/severity" component={SeverityAlerts} />
-                <Route path="/zones" component={ZoneAlerts} />
+                
 
             </div>
         </Router>
