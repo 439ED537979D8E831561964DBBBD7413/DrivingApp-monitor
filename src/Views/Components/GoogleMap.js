@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
+import { withGoogleMap , GoogleMap as GMap, Marker, Polyline} from 'react-google-maps';
 import store from  '../../Redux/Reducers/index';
-
-import { withGoogleMap, GoogleMap, Marker, Polyline} from 'react-google-maps';
-
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 const center = {
     lat : 19.432608, lng: -99.133209
@@ -16,33 +14,64 @@ const images = {
 class Map extends Component {
     constructor (props) {
         super(props);
-        this.getZoneAlerts = this.getZoneAlerts.bind(this);
+        this.getZones = this.getZones.bind(this);
+        this.loadAlerts =  this.loadAlerts.bind(this);
         this.state = {
-            zones : []
+            zones : [],
+            alerts : [],
+            alertsLoaded : false
         }
         let t = this;
         this.subs = store.subscribe( async () => {
-            t.getZoneAlerts();
+            t.getAlerts();
         })
     }
     componentDidMount (){
-        this.getZoneAlerts();
-        
+        this.getAlerts();
+
     }
 
-    async getZoneAlerts (){
+    componentWillUnmount() {
+        this.subs();
+    }
+
+    async getZones (){
         try {
             var zones = [];
             for (let zone in store.getState().zoneAlerts){
                 var tempZone =  store.getState().zoneAlerts[zone];
                 zones.push(tempZone);
+                
             }
             this.setState({
                 zones
             })
             
-        }catch(e){
-        }
+        }catch(e){}
+    }
+
+    getAlerts () {
+        try {
+
+            var zones = [];
+            for (let zone in store.getState().zoneAlerts){
+                var tempZone =  store.getState().zoneAlerts[zone];
+                zones.push(tempZone);
+                
+            }
+            if (zones.length === store.getState().zoneAlertsData.length && (zones.length > 0 && store.getState().zoneAlertsData.length > 0) && !this.state.alertsLoaded) {
+                
+                var newState = {
+                    alerts : store.getState().zoneAlertsData,
+                    zones: zones,
+                    alertsLoaded : true
+                }
+                this.setState(newState)
+            
+            }
+            
+            
+        }catch(e){}
     }
     
     convertPolygon (polygon) {
@@ -64,58 +93,65 @@ class Map extends Component {
             lng :Number(array[1])
         }
     }
+
+    loadAlerts () {
+
+        if (this.state.alertsLoaded) {
+            return (
+            <div>
+                {
+                    this.state.alerts.map((zone,j) => (
+                        <MarkerClusterer
+                            averageCenter
+                            enableRetinaIcons
+                            gridSize={100}
+                            onClick={(markerClusterer) => {
+                              }}
+                            key={j}
+                        >
+                        {
+                            zone.data.map((alert,i) => (
+                                <Marker
+                                    key={i}
+                                    options={{icon: {url : images.accident, scaledSize: new window.google.maps.Size(60, 62)}}}
+                                    position={alert.location}
+                                >
+                                </Marker>
+                            )) 
+                        }
+                        </MarkerClusterer>
+                    ))
+                } 
+
+                {
+                    this.state.zones.map((zone ,i ) => (
+                        <Polyline 
+                            key={i}
+                            path={zone.location}
+                            options={{strokeColor: '#2980b9'}}
+                        ></Polyline>
+                    ))
+                } 
+            </div>
+            )
+        }
+    }
     
 
    render() {
-
-        
-       
-        const GoogleMapExample = withGoogleMap(props => (
-        <GoogleMap
+        const MapContainer = withGoogleMap(props => (
+        <GMap
             defaultCenter = { center }
             defaultZoom = { 8 }
         >
-            {
-                this.state.zones.map((zone,j) => (
-                    <MarkerClusterer
-                        averageCenter
-                        enableRetinaIcons
-                        gridSize={80}
-                        onClick={(markerClusterer) => {
-                          }}
-                        key={j}
-                    >
-                    {
-                        zone.alerts.map((alert,i) => (
-                            <Marker
-                                key={i}
-                                options={{icon: {url : images.accident, scaledSize: new window.google.maps.Size(60, 62)}}}
-                                position={this.convertCoords(alert.location)}
-                            />
-                        ))   
-                    }
-                    </MarkerClusterer>
-                ))
-            }
-
-            {
-                this.state.zones.map((zone ,i ) => (
-                    <Polyline 
-                        key={i}
-                        path={this.convertPolygon(zone.location)}
-                        options={{strokeColor: '#2980b9'}}
-                    ></Polyline>
-                ))
-            }
-
-
-            
-        </GoogleMap>
+            {this.loadAlerts()}   
+              
+        </GMap>
    ));
 
    return(
       <div>
-        <GoogleMapExample
+        <MapContainer
           containerElement={ <div style={{ height: `650px`, width: '100%' }} /> }
           mapElement={ <div style={{ height: `95%` }} /> }
         />

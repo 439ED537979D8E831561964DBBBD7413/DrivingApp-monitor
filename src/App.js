@@ -12,7 +12,7 @@ import Map from './Views/Components/GoogleMap'
 
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
-import { loadCategoryAlerts , loadSeverityAlerts, loadZoneAlerts} from './Redux/Actions/index';
+import { loadCategoryAlerts , loadSeverityAlerts, loadZoneAlerts, loadAlertsZoneData} from './Redux/Actions/index';
 import store from './Redux/Reducers/index'
 
 import io from 'socket.io-client';
@@ -27,7 +27,8 @@ export default class App extends React.Component {
       this.socket = io.connect(`https://drivingapp-monitor-back.herokuapp.com/`)//, { transports: ['websocket'] });
       this.state = {
           chanel : "",
-          interval : null
+          interval : null,
+          alertsLoaded : false
       }
       
   }
@@ -55,12 +56,16 @@ export default class App extends React.Component {
   }
 
   getAlertsZone () {
+      let t = this;
       fetch("https://drivingapp-monitor-back.herokuapp.com/alerts/count/zone")
       .then((result) => {
           return result.json();
       })
       .then(data =>{
-          store.dispatch(loadZoneAlerts(data))      
+            for (let zone in data){
+                t.getAllAlertsZone(zone)
+            }
+            store.dispatch(loadZoneAlerts(data))
       })
       .catch(console.log)
 
@@ -69,8 +74,9 @@ export default class App extends React.Component {
           .then((result) => {
               return result.json();
           })
-          .then(data =>{
-              store.dispatch(loadZoneAlerts(data))      
+          .then(async data =>{
+
+              store.dispatch(loadZoneAlerts(data)) 
           })
           .catch(console.log)
       }, 60000)
@@ -79,6 +85,18 @@ export default class App extends React.Component {
           interval
       })
   }
+
+  async getAllAlertsZone (id) {
+    await fetch(`https://drivingapp-monitor-back.herokuapp.com/alerts/all/zone/${id}`)
+    .then((result) => {
+        return result.json();
+    })
+    .then(data =>{
+        store.dispatch(loadAlertsZoneData(id,data))
+    })
+}
+
+  
 
   componentDidMount(){
       this.socket.on('severityalerts', (data) =>store.dispatch(loadSeverityAlerts(data)));
@@ -93,8 +111,6 @@ export default class App extends React.Component {
       clearInterval(this.state.interval);
   }
 
-  
-  
   render() {
     return (
       <Router>
