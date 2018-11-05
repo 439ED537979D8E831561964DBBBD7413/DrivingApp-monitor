@@ -64,7 +64,7 @@ class SideBar extends React.Component {
                 activeClassName='active'  
                 to="/"
                 > 
-                  <i className="nc-icon nc-alert-circle-i"></i> 
+                  <i className="nc-icon nc-chart-pie-36"></i> 
                   Alerts Monitor
                 </NavLink>
             </li>
@@ -77,14 +77,24 @@ class SideBar extends React.Component {
                 className="nav-item nav-link" 
                 activeClassName='active'  
                 to="/map"> 
-                  <i className="nc-icon nc-globe"></i>
-                  Map
+                  <i className="nc-icon nc-world-2"></i>
+                  Alerts Map
               </NavLink>
             </li>
             <li >
-              <a href="./notifications.html">
-                <i className="nc-icon nc-bell-55"></i>
-                <p>Notifications</p>
+              <NavLink
+                exact
+                className="nav-item nav-link" 
+                activeClassName='active'  
+                to="/search"> 
+                <i className="nc-icon nc-zoom-split"></i>                
+                Search Users
+              </NavLink>
+            </li>
+            <li >
+              <a href="delimitation.html">
+                <i className="nc-icon nc-compass-05"></i>
+                <p>Places</p>
               </a>
             </li>
             <li>

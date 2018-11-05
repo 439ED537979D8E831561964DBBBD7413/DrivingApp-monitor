@@ -28,7 +28,7 @@ export default class Nav extends React.Component {
             })
         }else if (pathname === "/map") {
           this.setState({
-              title: "Map"
+              title: "Alerts Map"
           })
       }
     }
@@ -49,7 +49,7 @@ export default class Nav extends React.Component {
                   <span className="navbar-toggler-bar bar3"></span>
                 </button>
               </div>
-              <a className="navbar-brand" href="#pablo">{this.state.title}</a>
+              <a className="navbar-brand" href="/#">{this.state.title}</a>
             </div>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-bar navbar-kebab"></span>
