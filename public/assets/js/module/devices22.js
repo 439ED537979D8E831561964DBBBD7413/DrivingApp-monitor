@@ -55,17 +55,19 @@ function searching2(){
             'Access-Control-Allow-Methods':'GET, POST, OPTIONS, PUT, PATCH, DELETE'
         },
     })
-    .then((res) => res.json())
+    .then((res) =>{ 
+        if (res.status === 404){
+            showNotification('top','right', "This device has not been found in the zone", "danger");
+        }
+        return res.json();
+    })
     .then((data)=> {
-        if(data.length === 0){
-            alert("This device has not been found in the zone");
-        }  
-        else{
+        if(data.length > 0){
             showDeviceOnMap(data);
         }
     })
     .catch((error)=>{
-        console.log(error);
+        //console.log(error);
     })
 }
 

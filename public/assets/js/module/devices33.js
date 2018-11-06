@@ -46,7 +46,9 @@ function showDevicesOnmap(dataDevices){
         }
     }
     else{
-        alert("There is not any device on the institution zone")
+        var text  ="There is not any device on the institution zone";
+        showNotification('top','right', text, "danger");
+
     }
 }
 function searching3(){

@@ -135,8 +135,10 @@ function searching1(){
 function searchUser(userData){
     $.get(`${smartService}/crate/locationOwnerDateTime?owner=${userData[0]['id']}&date=${dateTimeSplit[0]}&time=${timeHour}`, function(data){
         if(data.length===0){
-            console.log("No se encontraron registros con el Usuario: "+userData[0]['firstName']+" en la fecha y hora especificados: "+date+" "+hour+" hours");
-            alert("No se encontraron registros con el Usuario: "+userData[0]['firstName']+" en la fecha y hora especificados: "+date+" "+hour+" hours");
+            var text = "No se encontraron registros con el Usuario: "+userData[0]['firstName']+" en la fecha y hora especificados: "+date+" "+hour+" hours";
+            showNotification('top','right', text, "danger");
+            //console.log("No se encontraron registros con el Usuario: "+userData[0]['firstName']+" en la fecha y hora especificados: "+date+" "+hour+" hours");
+            //alert("No se encontraron registros con el Usuario: "+userData[0]['firstName']+" en la fecha y hora especificados: "+date+" "+hour+" hours");
         }
         else{
             console.log(data);
@@ -146,7 +148,10 @@ function searchUser(userData){
                    showMap(data[0]['location'], data);
                 }
                 else{
-                    alert("El usuario: "+userData[0]['firstName']+" no se encontró en la zona  en la fecha y hora especificada: "+date+" "+hour+" hours");
+                    var text = "El usuario: "+userData[0]['firstName']+" no se encontró en la zona  en la fecha y hora especificada: "+date+" "+hour+" hours";
+                    showNotification('top','right', text, "danger");
+                    
+                    //alert("El usuario: "+userData[0]['firstName']+" no se encontró en la zona  en la fecha y hora especificada: "+date+" "+hour+" hours");
                 }    
             })
         }
@@ -177,6 +182,8 @@ async function searchingUserInCampus(locationCoordinates){
     }
 }
 
+
+
 function searchUserInfo(phoneNumber){
     console.log(phoneNumber);
     fetch(`${smartService}/api/user?phoneNumber=${phoneNumber}&status=1`, {
@@ -190,14 +197,17 @@ function searchUserInfo(phoneNumber){
         if(data.length > 0){
             searchUser(data);
         }else {
-            alert("No se encontró ningun usuario con el número de teléfono especificado");
+            var text = "No se encontró ningun usuario con el número de teléfono especificado";
+            showNotification('top','right', text, "danger")
         }
     })
     .catch((error)=>{
-        alert("No se encontró ningun usuario con el número de teléfono especificado");
-        console.log(error);
+        var text = "No se encontró ningun usuario con el número de teléfono especificado";
+        showNotification('top','right', text, "danger");
     })
 }
+
+
 
 function showMap(location, data){
     markerLayer.clearLayers();
