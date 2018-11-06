@@ -102,16 +102,42 @@ class SideBar extends React.Component {
                 Search Users
               </NavLink>
             </li>
-            <li >
-              <a href="delimitation.html">
-                <i className="nc-icon nc-compass-05"></i>
-                <p>Places</p>
-              </a>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                  <i className="nc-icon nc-compass-05"></i>  
+                  Places
+                </a>
+                <ul className="collapse" id="pageSubmenu">
+                    <li>
+                    <a href="./user.html">
+                      <i className="material-icons">
+                        account_balance
+                      </i>
+                      Zones
+                    </a>
+                    </li>
+                    <li>
+                      <a href="./user.html">
+                        <i className="material-icons">
+                          local_parking
+                        </i>
+                        Parkings
+                      </a>
+                    </li>
+                    <li>
+                    <a href="./user.html">
+                      <i className="material-icons">
+                        directions
+                      </i>
+                      Roads
+                    </a>
+                    </li>
+                </ul>
             </li>
             <li>
               <a href="./user.html">
                 <i className="nc-icon nc-single-02"></i>
-                <p>Settings</p>
+                Profile
               </a>
             </li>
           </ul>

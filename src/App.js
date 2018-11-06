@@ -123,6 +123,7 @@ export default class App extends React.Component {
                     <Route exact path="/awards" component={Awards} />
                     <Route exact path="/map" component={Map} />
                     <Route exact path="/search" component={Search} />
+                    <Route exact path="/places" component={Places} />
                 </div>
             </div>
             <Route path="/:active?" component={SideBar} />
@@ -133,4 +134,48 @@ export default class App extends React.Component {
   }
 }
 
-
+class Places extends React.Component {
+    render () {
+        return (
+        <div>
+            <ul className="nav nav-pills nav-pills-primary nav-pills-icons" role="tablist">
+                
+                <li className="nav-item">
+                    <a className="nav-link" href="#dashboard-1" role="tab" data-toggle="tab">
+                        <i className="tim-icons icon-laptop"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link active" href="#schedule-1" role="tab" data-toggle="tab">
+                        <i className="tim-icons icon-settings-gear-63"></i>
+                        Settings
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#tasks-1" role="tab" data-toggle="tab">
+                        <i className="tim-icons icon-calendar-60"></i>
+                        Tasks
+                    </a>
+                </li>
+            </ul>
+            <div className="tab-content tab-space">
+                <div className="tab-pane active" id="dashboard-1">
+                Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits.
+                <br/><br/>
+                Dramatically visualize customer directed convergence without revolutionary ROI.
+                </div>
+                <div className="tab-pane" id="schedule-1">
+                Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
+                <br/><br/>Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                </div>
+                <div className="tab-pane" id="tasks-1">
+                    Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+                    <br/><br/>Dynamically innovate resource-leveling customer service for state of the art customer service.
+                </div>
+            </div>
+        </div>
+        
+        )
+    } 
+}
