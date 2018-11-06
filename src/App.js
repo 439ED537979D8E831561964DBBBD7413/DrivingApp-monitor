@@ -5,8 +5,9 @@ import Footer from './Views/Footer'
 
 import Alerts from "./Views/Alerts"
 import Awards from "./Views/Awards"
-
 import Map from './Views/Components/GoogleMap'
+import Search from './Views/Search';
+
 
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
@@ -15,21 +16,7 @@ import store from './Redux/Reducers/index'
 
 import io from 'socket.io-client';
 
-class SearchUser extends React.Component {
-    render () {
-        return (
-        <div>
-            <iframe 
-                src="./search.html"
-                width="100%" 
-                height="700"
-                frameBorder="0"
-                title={"serch user"}>
-            </iframe>
-        </div>
-        )
-    }
-}
+
 
 export default class App extends React.Component {
     constructor (props){
@@ -135,7 +122,7 @@ export default class App extends React.Component {
                     <Route exact path="/" basename="/alerts" component={Alerts} />
                     <Route exact path="/awards" component={Awards} />
                     <Route exact path="/map" component={Map} />
-                    <Route exact path="/search" component={SearchUser} />
+                    <Route exact path="/search" component={Search} />
                 </div>
             </div>
             <Route path="/:active?" component={SideBar} />
