@@ -1,13 +1,11 @@
 import React from 'react';
 import SideBar from "./Views/SideBar"
 import Nav from "./Views/Nav"
+import Footer from './Views/Footer'
 
 import Alerts from "./Views/Alerts"
 import Awards from "./Views/Awards"
 
-//import Map from './Views/Components/Map'
-//import MapMutant from './Views/Components/MapMuntant'
-//import Map from './Views/Components/ReactLeafletMap'
 import Map from './Views/Components/GoogleMap'
 
 import { BrowserRouter as Router, Route} from "react-router-dom";
@@ -17,6 +15,21 @@ import store from './Redux/Reducers/index'
 
 import io from 'socket.io-client';
 
+class SearchUser extends React.Component {
+    render () {
+        return (
+        <div>
+            <iframe 
+                src="./search.html"
+                width="100%" 
+                height="700"
+                frameBorder="0"
+                title={"serch user"}>
+            </iframe>
+        </div>
+        )
+    }
+}
 
 export default class App extends React.Component {
     constructor (props){
@@ -122,6 +135,7 @@ export default class App extends React.Component {
                     <Route exact path="/" basename="/alerts" component={Alerts} />
                     <Route exact path="/awards" component={Awards} />
                     <Route exact path="/map" component={Map} />
+                    <Route exact path="/search" component={SearchUser} />
                 </div>
             </div>
             <Route path="/:active?" component={SideBar} />
@@ -133,36 +147,3 @@ export default class App extends React.Component {
 }
 
 
-class Footer extends React.Component {
-    render () {
-        return (
-        <footer className="footer footer-black  footer-white ">
-        <div className="container-fluid">
-          <div className="row">
-            <nav className="footer-nav">
-              <ul>
-                <li>
-                  <a href="https://www.creative-tim.com" >Driving App</a>
-                </li>
-                <li>
-                  <a href="http://blog.creative-tim.com/" >Documentation</a>
-                </li>
-                <li>
-                  <a href="https://www.creative-tim.com/license" >Cenidet</a>
-                </li>
-              </ul>
-            </nav>
-            <div className="credits ml-auto">
-              <span className="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>, based in <i className="fa fa-heart heart"></i> Creative Tim template by Driving App
-              </span>
-            </div>
-          </div>
-        </div>
-      </footer>
-      ) 
-    }
-}

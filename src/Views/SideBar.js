@@ -8,7 +8,8 @@ class SideBar extends React.Component {
         this.state = {
             alerts : "",
             awards : "",
-            areas : ""
+            areas : "",
+            search : ""
         };
     }
 
@@ -21,21 +22,31 @@ class SideBar extends React.Component {
             this.setState({
                 alerts : "active",
                  awards : "",
-                 areas : ""
+                 areas : "",
+                 search : ""
             })
         }else if (pathname === "/awards") {
             this.setState({
                 alerts : "",
                  awards : "active",
-                 areas : ""
+                 areas : "",
+                 search : ""
             })
         }else if (pathname === "/map") {
           this.setState({
               alerts : "",
                awards : "",
-               areas : "active"
+               areas : "active",
+               search : ""
           })
-      }
+        }else if (pathname === "/search") {
+          this.setState({
+              alerts : "",
+               awards : "",
+               areas : "",
+               search : "active"
+          })
+        }
     }
 
     componentWillReceiveProps (nextProps){
@@ -81,7 +92,7 @@ class SideBar extends React.Component {
                   Alerts Map
               </NavLink>
             </li>
-            <li >
+            <li className={this.state["search"]}>
               <NavLink
                 exact
                 className="nav-item nav-link" 

@@ -30,7 +30,12 @@ export default class Nav extends React.Component {
           this.setState({
               title: "Alerts Map"
           })
-      }
+        }
+        else if (pathname === "/search") {
+          this.setState({
+              title: "Users' Searching"
+          })
+        }
     }
 
     componentWillReceiveProps (nextProps){
