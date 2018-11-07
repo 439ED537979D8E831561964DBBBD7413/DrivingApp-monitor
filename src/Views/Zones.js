@@ -21,7 +21,6 @@ export default class Zones extends React.Component {
         })
     }
     render () {
-        console.log(this.state.zones)
         return (
             <div className="row">
                 <div className="col-md-12">
@@ -31,22 +30,22 @@ export default class Zones extends React.Component {
                     </div>
                     <div className="card-body">
                         <div className="table-responsive">
-                        <table className="table table-hover" id="zoneList">
+                        <table className="table table-hover table-sm" id="zoneList">
                             <thead className="thead-light">
                             <tr>
-                                <th>
+                                <th scope="col">
                                     ID
                                 </th>
-                                <th>
+                                <th scope="col">
                                     Name
                                 </th>
-                                <th>
+                                <th scope="col">
                                     Address
                                 </th>
-                                <th>
+                                <th scope="col">
                                     Description
                                 </th>
-                                <th className="text-right">
+                                <th scope="col">
                                 </th>
                             </tr>
                             </thead>
@@ -68,7 +67,7 @@ export default class Zones extends React.Component {
                     </div>
                     </div>
                 </div> 
-                <LeafletMap />
+                 <LeafletMap center={[19.3597191, -99.25841489999999]}/>
             </div>
         )
     }

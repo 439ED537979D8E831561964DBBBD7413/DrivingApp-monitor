@@ -19,7 +19,17 @@
   <link href="../assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
   
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKylGqXGF6dkieX9tcSsneA18xX-tAROw"></script>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">∫  
+ 
+<!-- LEAFLET BLOCK -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+<script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>
+<!-- END LEAFLET BLOCK-->
   <style>
     .leaflet-container {
       height: 650px;
@@ -35,7 +45,7 @@
     <div id="root">
     </div>
   </div>
-  <!--   Core JS Files   -->
+  
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -45,6 +55,7 @@
   <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <script src="../assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+
 </body>
 
 </html>

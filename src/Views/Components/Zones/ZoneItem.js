@@ -4,24 +4,19 @@ export default class ZoneItem extends React.Component {
     render () {
         return (
             <tr>
-                <td>
-                    {this.props.id.replace('Zone_','')}
-                </td>
-                <td>
+                <th scope="row">{this.props.id.replace('Zone_','')}</th>
+                <td >
                     {this.props.name}
                 </td>
                 <td>
                     {this.props.address}
                 </td>
-                <td>
+                <td className="text-justify">
                     {this.props.description}
                 </td>
-                <td>
+                <td className="row text-center">
                     <i className="material-icons">
-                        map
-                    </i>
-                    <i className="material-icons">
-                        edit
+                    remove_red_eye
                     </i>
                     <i className="material-icons">
                         delete
