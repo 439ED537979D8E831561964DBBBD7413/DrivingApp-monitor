@@ -13,10 +13,6 @@ class Map extends React.Component {
       center: [19.432608, -99.133209],
       zoom: 9,
       layers: [
-        /*L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-          attribution:
-            '&copy; <a href="http://osm.org /copyright">OpenStreetMap</a> contributors'
-        })*/
         L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
           maxZoom: 20,
           subdomains:['mt0','mt1','mt2','mt3']
