@@ -36,6 +36,11 @@ export default class Nav extends React.Component {
               title: "Users' Searching"
           })
         }
+        else if (pathname === "/places/zones") {
+          this.setState({
+              title: "Zones"
+          })
+        }
     }
 
     componentWillReceiveProps (nextProps){

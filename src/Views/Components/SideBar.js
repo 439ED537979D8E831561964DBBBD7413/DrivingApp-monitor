@@ -9,7 +9,8 @@ class SideBar extends React.Component {
             alerts : "",
             awards : "",
             areas : "",
-            search : ""
+            search : "",
+            zones : ""
         };
     }
 
@@ -23,28 +24,41 @@ class SideBar extends React.Component {
                 alerts : "active",
                  awards : "",
                  areas : "",
-                 search : ""
+                 search : "",
+                 zones : ""
             })
         }else if (pathname === "/awards") {
             this.setState({
                 alerts : "",
                  awards : "active",
                  areas : "",
-                 search : ""
+                 search : "",
+                 zones : ""
             })
         }else if (pathname === "/map") {
           this.setState({
               alerts : "",
                awards : "",
                areas : "active",
-               search : ""
+               search : "",
+               zones : ""
           })
         }else if (pathname === "/search") {
           this.setState({
               alerts : "",
                awards : "",
                areas : "",
-               search : "active"
+               search : "active",
+               zones : ""
+          })
+        }
+        else if (pathname === "/places/zones") {
+          this.setState({
+              alerts : "",
+               awards : "",
+               areas : "",
+               search : "",
+               zones : "active"
           })
         }
     }
@@ -102,19 +116,23 @@ class SideBar extends React.Component {
                 Search Users
               </NavLink>
             </li>
-            <li>
+            <li className={this.state["zones"]} >
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
                   <i className="nc-icon nc-compass-05"></i>  
                   Places
                 </a>
                 <ul className="collapse" id="pageSubmenu">
-                    <li>
-                    <a href="./user.html">
-                      <i className="material-icons">
-                        account_balance
-                      </i>
-                      Zones
-                    </a>
+                    <li  className={this.state["zones"]} >
+                      <NavLink
+                        exact
+                        className="nav-item nav-link" 
+                        activeClassName='active'  
+                        to="/places/zones"> 
+                        <i className="material-icons">
+                          account_balance
+                        </i>
+                        Zones
+                      </NavLink>
                     </li>
                     <li>
                       <a href="./user.html">
