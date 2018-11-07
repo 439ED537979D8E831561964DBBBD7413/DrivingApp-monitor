@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, NavLink, Switch} from "react-router-dom";
 
 import CategoryAlerts from './Components/Alerts/Category/CategoryAlerts';
 import SubcategoryAlerts from './Components/Alerts/Subcategory/SubcategoryAlerts';
@@ -30,14 +30,13 @@ export default class Alerts extends React.Component {
                 </nav>
 
                 <div style={{marginTop : 10}}>
-                    <Route exact path="/" component={CategoryAlerts} />
+                <Switch>
+                    <Route exact={true} path="/" component={CategoryAlerts} />
                     <Route path="/sub" component={SubcategoryAlerts} />
                     <Route path="/severity" component={SeverityAlerts} />
                     <Route path="/zones" component={ZoneAlerts} />
+                </ Switch>
                 </div>
-
-                
-
             </div>
         </Router>
         )
