@@ -1,5 +1,6 @@
 import React from "react";
 import L from "leaflet";
+import 'leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant';
 
 const style = {
   width: "10",
@@ -7,28 +8,58 @@ const style = {
 };
 
 class Map extends React.Component {
-  componentDidMount() {
-    
-    this.map = L.map("map", {
-      center: [19.432608, -99.133209],
-      zoom: 9,
-      layers: [
-        L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
-          maxZoom: 20,
-          subdomains:['mt0','mt1','mt2','mt3']
-      })
-      ]
-    });
-
-    L.marker([51.5, -0.09]).addTo(this.map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
-
-    this.layer = L.layerGroup().addTo(this.map);
+  constructor (props) {
+    super(props);
+    this.state = {
+      polylines : []
+    }
   }
+  componentDidMount() {
+    this.markerLayer = L.layerGroup()
+    this.map = L.map("mapid", {fullscreenControl: true, layers: [this.markerLayer]}).setView(this.props.center, 18);
+
+    var roadMutant = L.gridLayer.googleMutant({
+        maxZoom: 22,
+        type:'roadmap'
+    }).addTo(this.map);
+
+    var hybridMutant = L.gridLayer.googleMutant({
+        maxZoom: 22,
+        type:'hybrid'
+    });
+  
+    L.control.layers({
+        StreetsMap: roadMutant,
+        SateliteMap: hybridMutant
+    }, {}, {
+        collapsed: false
+    }).addTo(this.map);
+
+    this.setState({polylines : this.props.polylines});
+  }
+
+  componentWillReceiveProps (prevProps){
+    if (prevProps.center !== undefined){
+      this.map.setView(new L.LatLng(prevProps.center[0],prevProps.center[1]), 16);
+      this.markerLayer.clearLayers();
+      this.map.removeLayer(this.markerLayer);
+      this.markerLayer.addTo(this.map);
+    }
+    console.log(prevProps.currentCenter)
+    if (prevProps.currentCenter !== undefined){
+      this.map.panTo(new L.LatLng(prevProps.currentCenter[0],prevProps.currentCenter[1]));
+    }
+    this.setState({polylines: prevProps.polylines})
+  } 
   
   render() {
-    return <div id="map" style={style} />;
+    if (this.state.polylines.length > 0){
+      this.state.polylines.map((zone) => {
+        L.polyline(zone.location).addTo(this.markerLayer);
+        return true;
+      })
+    }
+    return <div id="mapid" style={style} />;
   }
 }
 

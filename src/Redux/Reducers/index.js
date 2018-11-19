@@ -4,7 +4,8 @@ var initialState = {
     categoryAlerts : {},
     severityAlerts : {},
     zoneAlerts : {},
-    zoneAlertsData : [] 
+    zoneAlertsData : [],
+    zonesData : []
 }
 
 
@@ -26,6 +27,8 @@ var alerts = (state = initialState, action) => {
                 data[alert].location = convertCoords(data[alert].location);
             }
             return { ...state, zoneAlertsData: [...state.zoneAlertsData, { id, data }]}
+        case 'LOAD_ZONES_DATA':
+            return { ...state, zonesData: action.data}
         default : 
             return state
     }

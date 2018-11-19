@@ -174,12 +174,7 @@ async function searchingUserInCampus(locationCoordinates){
     	j=i
 
     }
-    if(inzone){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return inzone;
 }
 
 

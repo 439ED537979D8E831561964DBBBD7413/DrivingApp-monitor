@@ -8,11 +8,14 @@ import Awards from "./Views/Awards"
 import Map from './Views/Components/GoogleMap'
 import Search from './Views/Search'
 import Zones from './Views/Zones'
-
-
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
-import { loadCategoryAlerts , loadSeverityAlerts, loadZoneAlerts, loadAlertsZoneData} from './Redux/Actions/index';
+import { 
+    loadCategoryAlerts,
+    loadSeverityAlerts,
+    loadZoneAlerts,
+    loadAlertsZoneData, 
+    loadZones
+} from './Redux/Actions/index';
 import store from './Redux/Reducers/index'
 
 import io from 'socket.io-client';
@@ -88,14 +91,23 @@ export default class App extends React.Component {
   }
 
   async getAllAlertsZone (id) {
-    await fetch(`https://drivingapp-monitor-back.herokuapp.com/alerts/all/zone/${id}`)
-    .then((result) => {
-        return result.json();
-    })
-    .then(data =>{
-        store.dispatch(loadAlertsZoneData(id,data))
-    })
-}
+        await fetch(`https://drivingapp-monitor-back.herokuapp.com/alerts/all/zone/${id}`)
+        .then((result) => {
+            return result.json();
+        })
+        .then(data =>{
+            store.dispatch(loadAlertsZoneData(id,data))
+        })
+   }
+   
+   getZones () {
+        fetch ("http://smartsecurity-webservice.herokuapp.com/api/zone?status=1")
+        .then((result) => {
+            return result.json();
+        }).then((zones)=> {
+            store.dispatch(loadZones(zones));
+        })
+   }
 
   
 
@@ -107,6 +119,7 @@ export default class App extends React.Component {
       this.getAlertsCategory();
       this.getAlertsSeverity();
       this.getAlertsZone();
+      this.getZones();
   }
 
   componentWillUnmount () {
@@ -116,7 +129,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <div style={{fontSize : 15}}>
             <div className="main-panel">
                 <Route path="/:active?" component={Nav} />
                 <div className="content" >

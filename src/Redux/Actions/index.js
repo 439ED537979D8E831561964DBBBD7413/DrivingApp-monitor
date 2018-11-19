@@ -40,3 +40,13 @@ export const loadAlertsZoneData = (id, data) =>{
         
     );
 } 
+
+export const loadZones = (data) =>{
+    return (
+        { 
+            type: 'LOAD_ZONES_DATA', 
+            data
+        }
+        
+    );
+} 
