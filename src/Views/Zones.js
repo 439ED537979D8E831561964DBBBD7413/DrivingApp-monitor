@@ -6,7 +6,7 @@ import ZonesPanel from './ZonesPanel';
 export default class Zones extends React.Component {
     render(){
         return(
-            <Router>
+            <Router basename="#">
                 <div>
                     <Switch>
                         <Route path="/places/zones/" exact={true} component={ZonesPanel} />

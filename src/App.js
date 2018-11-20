@@ -8,7 +8,7 @@ import Awards from "./Views/Awards"
 import Map from './Views/Components/GoogleMap'
 import Search from './Views/Search'
 import Zones from './Views/Zones'
-import { HashRouter as Router, Route, Switch} from "react-router-dom";
+import { HashRouter  as Router, Route, Switch} from "react-router-dom";
 import { 
     loadCategoryAlerts,
     loadSeverityAlerts,
@@ -101,7 +101,7 @@ export default class App extends React.Component {
    }
    
    getZones () {
-        fetch ("http://smartsecurity-webservice.herokuapp.com/api/zone?status=1")
+        fetch ("https://smartsecurity-webservice.herokuapp.com/api/zone?status=1")
         .then((result) => {
             return result.json();
         }).then((zones)=> {
@@ -144,7 +144,6 @@ export default class App extends React.Component {
                 <Footer />
             </div>
             <Route path="/:active?" component={SideBar} />
-           
         </div>
       </Router>
     );
