@@ -8,7 +8,7 @@ import Awards from "./Views/Awards"
 import Map from './Views/Components/GoogleMap'
 import Search from './Views/Search'
 import Zones from './Views/Zones'
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { HashRouter as Router, Route, Switch} from "react-router-dom";
 import { 
     loadCategoryAlerts,
     loadSeverityAlerts,
