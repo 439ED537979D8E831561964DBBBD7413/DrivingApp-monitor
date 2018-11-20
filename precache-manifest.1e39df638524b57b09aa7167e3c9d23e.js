@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/DrivingApp-monitor/static/js/runtime~main.25ec8e1b.js"
   },
   {
-    "revision": "1f7a74cb5afbe6363ac3",
-    "url": "/DrivingApp-monitor/static/js/main.1f7a74cb.chunk.js"
+    "revision": "33d11969ab4d3c5e7f7e",
+    "url": "/DrivingApp-monitor/static/js/main.33d11969.chunk.js"
   },
   {
     "revision": "13efacffcee3d572d334",
     "url": "/DrivingApp-monitor/static/js/1.13efacff.chunk.js"
   },
   {
-    "revision": "1f7a74cb5afbe6363ac3",
+    "revision": "33d11969ab4d3c5e7f7e",
     "url": "/DrivingApp-monitor/static/css/main.5ee99772.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/DrivingApp-monitor/static/css/1.30a4c8c5.chunk.css"
   },
   {
-    "revision": "b517aebef8481f1e14931aad4a747b68",
+    "revision": "5209fb62f1e55179a76b804ad4d84a59",
     "url": "/DrivingApp-monitor/index.html"
   }
 ];
