@@ -71,9 +71,9 @@ class SideBar extends React.Component {
     return (
       <div className="sidebar"  data-active-color="danger">
         <div className="logo">
-          <a href="http://www.creative-tim.com" className="simple-text logo-mini">
+          <a href="https://cenidetiot.github.io" className="simple-text logo-mini">
             <div className="logo-image-small">
-              <img src="../assets/img/logo.png" alt=""/>
+              <img src={process.env.PUBLIC_URL + "../assets/img/logo.png"} alt=""/>
             </div>
           </a>
           <a href="/" className="simple-text logo-normal">
