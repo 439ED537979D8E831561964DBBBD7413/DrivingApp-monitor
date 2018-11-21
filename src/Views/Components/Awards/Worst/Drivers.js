@@ -15,7 +15,7 @@ export default class Drivers extends React.Component {
         return (
             <div className={" card col-sm-12 col-lg-2"} align="center" style={{margin: 5}}>
                 <div  style={{height : 40, marginTop: 10}} >
-                    <img alt="" src="/assets/img/user-image-.png" style={{height: 50,width:50}}/>
+                    <img alt="" src={process.env.PUBLIC_URL + "/assets/img/user-image-.png"} style={{height: 50,width:50}}/>
                 </div>
                 <div>
                 {
@@ -25,7 +25,7 @@ export default class Drivers extends React.Component {
                             alt="" 
                             key={i}
                             style={{height:20, width:20}} 
-                            src="/assets/img/skull.png"/> 
+                            src={process.env.PUBLIC_URL + "/assets/img/skull.png"}/> 
                         )
                     })
                 }
