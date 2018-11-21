@@ -1,7 +1,7 @@
 {
   "main.css": "/DrivingApp-monitor/static/css/main.4674439c.chunk.css",
-  "main.js": "/DrivingApp-monitor/static/js/main.fd3b8938.chunk.js",
-  "main.js.map": "/DrivingApp-monitor/static/js/main.fd3b8938.chunk.js.map",
+  "main.js": "/DrivingApp-monitor/static/js/main.2f8dd9a4.chunk.js",
+  "main.js.map": "/DrivingApp-monitor/static/js/main.2f8dd9a4.chunk.js.map",
   "static/css/1.f5f5c79a.chunk.css": "/DrivingApp-monitor/static/css/1.f5f5c79a.chunk.css",
   "static/js/1.18832c81.chunk.js": "/DrivingApp-monitor/static/js/1.18832c81.chunk.js",
   "static/js/1.18832c81.chunk.js.map": "/DrivingApp-monitor/static/js/1.18832c81.chunk.js.map",
@@ -10,6 +10,6 @@
   "static/css/1.f5f5c79a.chunk.css.map": "/DrivingApp-monitor/static/css/1.f5f5c79a.chunk.css.map",
   "static/css/main.4674439c.chunk.css.map": "/DrivingApp-monitor/static/css/main.4674439c.chunk.css.map",
   "index.html": "/DrivingApp-monitor/index.html",
-  "precache-manifest.a046a71ed3ed48b5e342a586721bfb23.js": "/DrivingApp-monitor/precache-manifest.a046a71ed3ed48b5e342a586721bfb23.js",
+  "precache-manifest.5c0ff30e76df7438ed130fa60439860d.js": "/DrivingApp-monitor/precache-manifest.5c0ff30e76df7438ed130fa60439860d.js",
   "service-worker.js": "/DrivingApp-monitor/service-worker.js"
 }
