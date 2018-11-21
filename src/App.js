@@ -2,7 +2,6 @@ import React from 'react';
 import SideBar from "./Views/Components/SideBar"
 import Nav from "./Views/Components/Nav"
 import Footer from './Views/Components/Footer'
-
 import Alerts from "./Views/Alerts"
 import Awards from "./Views/Awards"
 import Map from './Views/Components/GoogleMap'
@@ -19,8 +18,6 @@ import {
 import store from './Redux/Reducers/index'
 
 import io from 'socket.io-client';
-
-
 
 export default class App extends React.Component {
     constructor (props){
@@ -108,10 +105,6 @@ export default class App extends React.Component {
             store.dispatch(loadZones(zones));
         })
    }
-
-  
-
-
   componentDidMount(){
       window.alert("Version 3");
       this.socket.on('severityalerts', (data) =>store.dispatch(loadSeverityAlerts(data)));
@@ -122,11 +115,9 @@ export default class App extends React.Component {
       this.getAlertsZone();
       this.getZones();
   }
-
   componentWillUnmount () {
       clearInterval(this.state.interval);
   }
-
   render() {
     return (
       <Router>

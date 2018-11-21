@@ -66,7 +66,6 @@ export default class ZonesPanel extends React.Component {
     }
 
     showSelectedZone () {
-        console.log("show zone")
         if (this.state.selectedZone > -1 ) {
             var zone = this.state.zones[this.state.selectedZone];
             return (

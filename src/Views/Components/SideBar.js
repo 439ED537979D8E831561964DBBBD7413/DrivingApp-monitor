@@ -87,6 +87,7 @@ class SideBar extends React.Component {
                 exact 
                 className="nav-item nav-link" 
                 activeClassName='active'  
+                replace
                 to="/"
                 > 
                   <i className="nc-icon nc-chart-pie-36"></i> 
@@ -94,13 +95,14 @@ class SideBar extends React.Component {
                 </NavLink>
             </li>
             <li className={this.state["awards"]}>
-              <NavLink exact className="nav-item nav-link" activeClassName='active'  to="/awards"> <i className="nc-icon nc-circle-10"></i>User awards </NavLink>
+              <NavLink replace exact className="nav-item nav-link" activeClassName='active'  to="/awards"> <i className="nc-icon nc-circle-10"></i>User awards </NavLink>
             </li>
             <li className={this.state["areas"]}>
               <NavLink
                 exact
                 className="nav-item nav-link" 
                 activeClassName='active'  
+                replace
                 to="/map"> 
                   <i className="nc-icon nc-world-2"></i>
                   Alerts Map
@@ -109,6 +111,7 @@ class SideBar extends React.Component {
             <li className={this.state["search"]}>
               <NavLink
                 exact
+                replace
                 className="nav-item nav-link" 
                 activeClassName='active'  
                 to="/search"> 
@@ -125,6 +128,7 @@ class SideBar extends React.Component {
                     <li  className={this.state["zones"]} >
                       <NavLink
                         exact
+                        replace
                         className="nav-item nav-link" 
                         activeClassName='active'  
                         to="/places/zones"> 

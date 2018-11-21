@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { HashRouter as Router, Route, NavLink, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, NavLink, Switch} from "react-router-dom";
 
 import CategoryAlerts from './Components/Alerts/Category/CategoryAlerts';
 import SubcategoryAlerts from './Components/Alerts/Subcategory/SubcategoryAlerts';
@@ -9,22 +9,23 @@ import ZoneAlerts from './Components/Alerts/Zones/ZoneAlerts';
 
 export default class Alerts extends React.Component {
     render() {
+        
         return (
         <Router basename="#">
             <div>
                 <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
                         <li>
-                            <NavLink exact className="nav-item nav-link" activeClassName='active'  to="/">Category</NavLink>
+                            <NavLink exact replace className="nav-item nav-link" activeClassName='active'  to="/">Category</NavLink>
                         </li>
                         <li>
-                            <NavLink exact className="nav-item nav-link" activeClassName='active' to="/sub">Subcategory</NavLink>
+                            <NavLink exact replace className="nav-item nav-link" activeClassName='active' to="/sub">Subcategory</NavLink>
                         </li>
                         <li>
-                            <NavLink exact className="nav-item nav-link" activeClassName='active' to="/severity">Severity</NavLink>
+                            <NavLink exact replace className="nav-item nav-link" activeClassName='active' to="/severity">Severity</NavLink>
                         </li>
                         <li>
-                            <NavLink exact className="nav-item nav-link" activeClassName='active' to="/zones">Zones</NavLink>
+                            <NavLink exact replace className="nav-item nav-link" activeClassName='active' to="/zones">Zones</NavLink>
                         </li>
                     </div>
                 </nav>
