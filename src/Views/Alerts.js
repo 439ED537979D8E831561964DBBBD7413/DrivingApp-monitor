@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink, Switch} from "react-router-dom";
+import { HashRouter as Router, Route, NavLink, Switch} from "react-router-dom";
 
 import CategoryAlerts from './Components/Alerts/Category/CategoryAlerts';
 import SubcategoryAlerts from './Components/Alerts/Subcategory/SubcategoryAlerts';

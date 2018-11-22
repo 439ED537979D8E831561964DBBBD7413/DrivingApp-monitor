@@ -1,4 +1,6 @@
 import React from 'react'
+import LeafletMap from '../LeafletMap'
+
 
 export default class UpdateForm extends React.Component {
     constructor (props){
@@ -15,7 +17,6 @@ export default class UpdateForm extends React.Component {
     }
 
     componentDidMount(){
-        console.log("montando")
         this.setState({
             name :  this.props.name,
             address : this.props.address,
@@ -84,7 +85,6 @@ export default class UpdateForm extends React.Component {
         fetch(`http://smartsecurity-webservice.herokuapp.com/api/zone/${this.props.id}`, {method : "DELETE"})
         .then((result) =>{
             if (result.status >= 200 && result.status <= 208 ){
-                console.log(result.status , "DELETED")
                 t.props.hideZone();
             }else{
                 console.log("Ocirrió un error mientras se elminaba elemento")
@@ -95,7 +95,6 @@ export default class UpdateForm extends React.Component {
     showNotification(from, align, text, type){
         window.$.notify({
             message: text
-    
           },{
               type: type,
               timer: 4000,
@@ -109,31 +108,38 @@ export default class UpdateForm extends React.Component {
     render () {
         return (
             <form id="form" onSubmit={this.handleSubmit}>
-                <div className="form-group row"> 
-                    <div className="col-6">
-                        <button className="btn btn-sm btn-success btn-round btn-icon" onClick={this.props.hideZone}><i className="fa fa-arrow-left"></i></button>
-                        <button type="submit" className="btn btn-sm btn-primary btn-round btn-icon"><i className="fa fa-floppy-o"></i></button>
-                        <button type="button" onClick={this.handleDelete} className="btn btn-sm btn-danger btn-round btn-icon"><i className="fa fa-trash"></i></button>
+                <div className="row">
+                    <div className="col-md-5">
+                        <div className="form-group">
+                            <label htmlFor="zoneName">  Name: </label>
+                            <input type="text" name="name" onChange={this.handleChange} value={this.state.name} className="form-control text-center" required />
+                        </div>
+                        <div className="form-group basic-textarea">
+                            <label htmlFor="zoneDescription"> Description: </label>
+                            <textarea className="form-control text-center" onChange={this.handleChange} name="description" value={this.state.description} placeholder="Brief description of the zone" required rows="2"></textarea>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="zoneAddress"> 
+                                Address:
+                            </label>
+                            <textarea className="form-control text-center is-invalid " onChange={this.handleChangeAddress} name="address" value={this.state.address} placeholder="Insert the address of the zone" required rows="2"></textarea>
+                        </div>
                     </div>
+                    <div className="col-md-7">
+                        <div className="input-group">
+                            <LeafletMap 
+                                center={this.props.center} 
+                                zoom={17}
+                                polylines={[this.props.zone]}
+                            />
+                        </div>
+                        
+                        
+                    </div>  
                 </div>
-                
-                <div className="form-group">
-                    <label htmlFor="zoneName">  Name: </label>
-                    <input type="text" name="name" onChange={this.handleChange} value={this.state.name} className="form-control text-center" required />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="zoneAddress"> 
-                        Address:
-                    </label>
-                    <textarea className="form-control text-center is-invalid " onChange={this.handleChangeAddress} name="address" value={this.state.address} placeholder="Insert the address of the zone" required rows="2"></textarea>
-                </div>
-                <div className="form-group basic-textarea">
-                    <label htmlFor="zoneDescription"> Description: </label>
-                    <textarea className="form-control text-center" onChange={this.handleChange} name="description" value={this.state.description} placeholder="Brief description of the zone" required rows="2"></textarea>
-                </div>  
-                
                 
             </form>
+            
         )
     }
 }

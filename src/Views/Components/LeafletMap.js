@@ -3,8 +3,10 @@ import L from "leaflet";
 import 'leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant';
 
 const style = {
-  width: "10",
-  height: "30"
+  width: "100%",
+  height: "30",
+  margin: 0
+  
 };
 
 class Map extends React.Component {
@@ -16,18 +18,18 @@ class Map extends React.Component {
   }
   componentDidMount() {
     this.markerLayer = L.layerGroup()
-    this.map = L.map("mapid", {fullscreenControl: true, layers: [this.markerLayer]}).setView(this.props.center, 18);
+    this.map = L.map("mapid", {fullscreenControl: true, layers: [this.markerLayer]}).setView(this.props.center, this.props.zoom);
 
     var roadMutant = L.gridLayer.googleMutant({
-        maxZoom: 22,
-        type:'roadmap'
+      maxZoom: 22,
+      type:'roadmap'
     }).addTo(this.map);
 
     var hybridMutant = L.gridLayer.googleMutant({
         maxZoom: 22,
         type:'hybrid'
     });
-  
+
     L.control.layers({
         StreetsMap: roadMutant,
         SateliteMap: hybridMutant
@@ -35,21 +37,24 @@ class Map extends React.Component {
         collapsed: false
     }).addTo(this.map);
 
-    this.setState({polylines : this.props.polylines});
+    if (this.props.polylines !== undefined)
+      this.setState({polylines: this.props.polylines})
+
   }
 
   componentWillReceiveProps (prevProps){
     if (prevProps.center !== undefined){
-      this.map.setView(new L.LatLng(prevProps.center[0],prevProps.center[1]), 16);
+      this.map.setView(new L.LatLng(prevProps.center[0],prevProps.center[1]), prevProps.zoom);
       this.markerLayer.clearLayers();
       this.map.removeLayer(this.markerLayer);
       this.markerLayer.addTo(this.map);
     }
-    console.log(prevProps.currentCenter)
     if (prevProps.currentCenter !== undefined){
       this.map.panTo(new L.LatLng(prevProps.currentCenter[0],prevProps.currentCenter[1]));
     }
-    this.setState({polylines: prevProps.polylines})
+    if (prevProps.polylines !== undefined)
+      this.setState({polylines: prevProps.polylines})
+
   } 
   
   render() {
@@ -59,7 +64,7 @@ class Map extends React.Component {
         return true;
       })
     }
-    return <div id="mapid" style={style} />;
+    return (<div id="mapid" style={style}></div> );
   }
 }
 
