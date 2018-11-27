@@ -15,11 +15,14 @@ export default class ShowZone extends React.Component {
         })
     }
     componentDidMount () {
+        this.setState({id : this.props.match.params.id})
         this.getZone(this.props.match.params.id);
     }
 
     componentWillReceiveProps(nextProps){
-        this.getZone(nextProps.match.params.id)
+        if (nextProps.match.params.id !== this.state.id) {
+            this.getZone(nextProps.match.params.id)
+        }
     }
 
     componentWillUnmount() {
@@ -27,7 +30,6 @@ export default class ShowZone extends React.Component {
     }
     getZone(id) {
         try {
-
             let zones = store.getState().zonesData;
             let zone  =  zones[id];
             this.setState({zone});

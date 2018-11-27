@@ -11,7 +11,7 @@ export default class Alerts extends React.Component {
     render() {
         
         return (
-        <Router basename="#">
+        <Router basename="/#">
             <div>
                 <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">

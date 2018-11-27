@@ -106,8 +106,7 @@ export default class App extends React.Component {
         })
    }
   componentDidMount(){
-
-      this.socket.on('severityalerts', (data) =>store.dispatch(loadSeverityAlerts(data)));
+        this.socket.on('severityalerts', (data) =>store.dispatch(loadSeverityAlerts(data)));
       this.socket.on('categoryalerts', (data) =>store.dispatch(loadCategoryAlerts(data)));
       this.socket.on('zonealerts' , (data) =>store.dispatch(loadZoneAlerts(data)));
       this.getAlertsCategory();

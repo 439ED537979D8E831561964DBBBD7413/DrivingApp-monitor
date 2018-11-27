@@ -6,31 +6,37 @@ export default class UpdateForm extends React.Component {
     constructor (props){
         super(props);
         this.handleChange= this.handleChange.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
         this.handleSubmit =  this.handleSubmit.bind(this);
-        this.handleChangeAddress = this.handleChangeAddress.bind(this);
+        this.mapCallBack = this.mapCallBack.bind(this);
         this.state = {
+            id : "",
             name : "",
             address : "",
-            description : ""
+            description : "",
+            center : [0,0]
         }
     }
 
     componentDidMount(){
         this.setState({
+            id : this.props.id,
             name :  this.props.name,
             address : this.props.address,
-            description : this.props.description
+            description : this.props.description,
+            center : this.props.center
         })
     }
 
     componentWillReceiveProps(newProps){
-        //this.addresRef = React
-        this.setState({
-            name :  newProps.name,
-            address : newProps.address,
-            description : newProps.description
-        })
+        if (newProps.id !== this.state.id){
+            this.setState({
+                id : newProps.id,
+                name :  newProps.name,
+                address : newProps.address,
+                description : newProps.description
+            })
+        }
+        
     }
 
     handleChange(event) {
@@ -38,26 +44,6 @@ export default class UpdateForm extends React.Component {
         newState[event.target.name] = event.target.value;
         this.setState(newState);
     }
-
-    handleChangeAddress (event) {
-        let value  = event.target.value;
-
-        fetch (`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(value)}&key=AIzaSyDCflB_l_yiXG9F29g65Q33boBrCJTepmM`) 
-        .then((result) => {
-            return result.json()
-        })
-        .then(data =>{
-            if (data.results.length > 0){
-            console.log(data.results[0].geometry.location)
-            this.props.changeCenterMap([data.results[0].geometry.location.lat,data.results[0].geometry.location.lng]);
-            }
-            else
-            console.log("No se enecotraoron")
-        })
-    
-        this.setState({address :  value})
-    }
-
     handleSubmit(event) {
         event.preventDefault();
         fetch(`http://smartsecurity-webservice.herokuapp.com/api/zone/${this.props.id}`,  {
@@ -80,17 +66,6 @@ export default class UpdateForm extends React.Component {
         }) 
     }
 
-    handleDelete() {
-        let t = this;
-        fetch(`http://smartsecurity-webservice.herokuapp.com/api/zone/${this.props.id}`, {method : "DELETE"})
-        .then((result) =>{
-            if (result.status >= 200 && result.status <= 208 ){
-                t.props.hideZone();
-            }else{
-                console.log("Ocirrió un error mientras se elminaba elemento")
-            }
-        })
-    }
 
     showNotification(from, align, text, type){
         window.$.notify({
@@ -105,36 +80,27 @@ export default class UpdateForm extends React.Component {
           });
     }
 
+    mapCallBack (text) {
+        this.setState({address : text})
+    }
+
     render () {
+        console.log(this.state.description)
         return (
             <form id="form" onSubmit={this.handleSubmit}>
                 <div className="row">
-                    <div className="col-md-5">
-                        <div className="form-group">
-                            <label htmlFor="zoneName">  Name: </label>
-                            <input type="text" name="name" onChange={this.handleChange} value={this.state.name} className="form-control text-center" required />
-                        </div>
-                        <div className="form-group basic-textarea">
-                            <label htmlFor="zoneDescription"> Description: </label>
-                            <textarea className="form-control text-center" onChange={this.handleChange} name="description" value={this.state.description} placeholder="Brief description of the zone" required rows="2"></textarea>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="zoneAddress"> 
-                                Address:
-                            </label>
-                            <textarea className="form-control text-center is-invalid " onChange={this.handleChangeAddress} name="address" value={this.state.address} placeholder="Insert the address of the zone" required rows="2"></textarea>
-                        </div>
-                    </div>
-                    <div className="col-md-7">
+                    <div className="col-md-12">
                         <div className="input-group">
                             <LeafletMap 
-                                center={this.props.center} 
+                                center={this.state.center} 
                                 zoom={17}
                                 polylines={[this.props.zone]}
+                                name={this.state.name}
+                                description={this.state.description}
+                                address={this.state.address}
+                                callback={this.mapCallBack}
                             />
                         </div>
-                        
-                        
                     </div>  
                 </div>
                 

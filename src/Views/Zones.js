@@ -5,13 +5,6 @@ import ShowZone from './ShowZone'
 
 
 export default class Zones extends React.Component {
-    componentDidMount() {
-        /*
-        console.log(this.props.location)
-        console.log(this.props.match)
-        console.log(this.props.history)
-        */
-    }
     render(){
         return(
             <Router >

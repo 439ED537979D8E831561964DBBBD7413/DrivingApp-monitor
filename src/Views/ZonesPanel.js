@@ -69,33 +69,33 @@ export default class ZonesPanel extends React.Component {
                     <div className="card">
                         <div className="card-body">
                             <div className="row">
-                                <div className="col-md-5">
-                                    <div className="list-group" style={{height: "650px", overflowY: "scroll"}}>
-                                        {
-                                            this.state.zones.map((zone, index) => (
-                                                <ZoneItem  
-                                                    key={index}
-                                                    idZone={zone.idZone}
-                                                    name={zone.name}
-                                                    index={index}
-                                                    address={zone.address}
-                                                    description={zone.description}
-                                                    selectZone={this.selectZone}
-                                                    updateZones={this.updateZones}
-                                                    changeCenterMap={this.changeCenterMap}
-                                                />
-                                            ))
-                                        }
-                                    </div>
-                                </div>
-                                 <div className="col-md-7">
+                            <div className="col-md-7">
                                     <LeafletMap 
-                                        center={[0,0]}
-                                        currentCenter={this.state.center} 
+                                        center={this.state.center} 
                                         zoom ={ this.state.zoom }
                                         polylines={this.state.zones}
                                     />
                                 </div>
+                            <div className="col-md-5">
+                                <div className="list-group" style={{height: "650px", overflowY: "scroll"}}>
+                                    {
+                                        this.state.zones.map((zone, index) => (
+                                            <ZoneItem  
+                                                key={index}
+                                                idZone={zone.idZone}
+                                                name={zone.name}
+                                                index={index}
+                                                address={zone.address}
+                                                description={zone.description}
+                                                selectZone={this.selectZone}
+                                                updateZones={this.updateZones}
+                                                changeCenterMap={this.changeCenterMap}
+                                            />
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                                 
                             </div>
                         </div>
                     </div>
